@@ -37,34 +37,34 @@ func main() {
 		fmt.Println("Enter your email:")
 		fmt.Scan(&email)
 
-		if userTickets > remainingTickets {
+		if userTickets <= remainingTickets {
+
+			remainingTickets = remainingTickets - userTickets
+			bookings = append(bookings, firstName+" "+lastName)
+
+			fmt.Printf("The whole slice is: %v\n", bookings)
+			fmt.Printf("The first element of the slice is: %v\n", bookings[0])
+			fmt.Printf("The size of the slice is: %v\n", len(bookings))
+			fmt.Printf("The type of the slice %T\n", bookings)
+
+			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
+			fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
+
+			firstNames := []string{}
+
+			for _, booking := range bookings {
+				var names = strings.Fields(booking)
+				firstNames = append(firstNames, names[0])
+			}
+			fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
+
+			if remainingTickets == 0 {
+				fmt.Println("All tickets are sold out for the conference. Please come next year!")
+				//End the program by breaking the loop!
+				break
+			}
+		} else {
 			fmt.Printf("We have only %v tickets remaining! so you cannot book %v tickets", remainingTickets, userTickets)
-			continue
-		}
-
-		remainingTickets = remainingTickets - userTickets
-		bookings = append(bookings, firstName+" "+lastName)
-
-		fmt.Printf("The whole slice is: %v\n", bookings)
-		fmt.Printf("The first element of the slice is: %v\n", bookings[0])
-		fmt.Printf("The size of the slice is: %v\n", len(bookings))
-		fmt.Printf("The type of the slice %T\n", bookings)
-
-		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
-		fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
-
-		firstNames := []string{}
-
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
-			firstNames = append(firstNames, names[0])
-		}
-		fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
-
-		if remainingTickets == 0 {
-			fmt.Println("All tickets are sold out for the conference. Please come next year!")
-			//End the program by breaking the loop!
-			break
 		}
 
 	}
