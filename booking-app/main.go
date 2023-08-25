@@ -56,6 +56,12 @@ func main() {
 		}
 		fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
 
+		if remainingTickets == 0 {
+			fmt.Println("All tickets are sold out for the conference. Please come next year!")
+			//End the program by breaking the loop!
+			break
+		}
+
 	}
 
 }
