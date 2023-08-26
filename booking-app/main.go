@@ -18,22 +18,9 @@ func main() {
 
 	for {
 		//Infinite loop
-		var firstName string
-		var lastName string
-		var userTickets uint
-		var email string
 
-		fmt.Println("Enter your first name:")
-		fmt.Scan(&firstName)
-
-		fmt.Println("Enter your last name:")
-		fmt.Scan(&lastName)
-
-		fmt.Println("Enter number of tickets to purchased:")
-		fmt.Scan(&userTickets)
-
-		fmt.Println("Enter your email:")
-		fmt.Scan(&email)
+		//Get user inputs
+		firstName, lastName, email, userTickets := getUserInput()
 
 		//Validate user inputs
 		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
@@ -48,7 +35,6 @@ func main() {
 			fmt.Printf("The type of the slice %T\n", bookings)
 
 			//Call print first name function
-
 			firstNames := getFirstNames(bookings)
 
 			fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
@@ -102,12 +88,14 @@ func main() {
 
 }
 
+// Greet user function - Greets the users
 func greetUsers(conferenceName string, totalTickets uint, remainingTickets uint) {
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
 	fmt.Printf("We have total of %v tickets out of which we still have %v tickets available!\n", totalTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 }
 
+// Prints firstnames of the users
 func getFirstNames(bookings []string) []string {
 	firstNames := []string{}
 
@@ -119,10 +107,33 @@ func getFirstNames(bookings []string) []string {
 	return firstNames
 }
 
+// Validates user input
 func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(email, "@")
 	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
 	return isValidName, isValidEmail, isValidTicketNumber
+}
+
+func getUserInput() (string, string, string, uint) {
+	var firstName string
+	var lastName string
+	var email string
+	var userTickets uint
+
+	fmt.Println("Enter your first name:")
+	fmt.Scan(&firstName)
+
+	fmt.Println("Enter your last name:")
+	fmt.Scan(&lastName)
+
+	fmt.Println("Enter your email:")
+	fmt.Scan(&email)
+
+	fmt.Println("Enter number of tickets to purchased:")
+	fmt.Scan(&userTickets)
+
+	return firstName, lastName, email, userTickets
+
 }
