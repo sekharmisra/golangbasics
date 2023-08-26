@@ -69,6 +69,8 @@ func main() {
 			}
 		} else {
 
+			//User input validations!
+
 			if !isValidName {
 				fmt.Println("Firstname or lastname is too short!")
 			}
@@ -81,6 +83,26 @@ func main() {
 				fmt.Println("Ticket number is invaid!")
 			}
 		}
+
+	}
+
+	//Switch Statements:
+
+	city := "London"
+
+	switch city {
+
+	case "New York":
+		fmt.Println("New York city selected!")
+
+	case "London":
+		fmt.Println("London city selected!")
+
+	case "New Dehli", "Bangalore":
+		fmt.Println("New Delhi & Banglaore city selected!")
+
+	default:
+		fmt.Println("Invalid city selected!")
 
 	}
 
