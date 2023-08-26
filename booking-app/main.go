@@ -5,38 +5,37 @@ import (
 	"strings"
 )
 
-func main() {
-	var conferenceName = "Go conference"
-	const totalTickets uint = 50
-	var remainingTickets uint = 50
-	//var bookings []string
-	bookings := []string{}
+const totalTickets uint = 50
 
-	fmt.Printf("Conference name is of type %T, totaltickets is of type %T, remainingtickets is of type %T \n", conferenceName, totalTickets, remainingTickets)
-	fmt.Printf("Booking is of type  %T\n", bookings)
-	greetUsers(conferenceName, totalTickets, remainingTickets)
+var conferenceName = "Go conference"
+var remainingTickets uint = 50
+var bookings = []string{}
+
+func main() {
+
+	//Step 0 - Print selected conference city!
+	printSelectedConferenceCity()
+
+	//Step 1 - Greet users
+	greetUsers()
 
 	for {
 		//Infinite loop
 
-		//Get user inputs
+		//Step 2: Get user inputs
 		firstName, lastName, email, userTickets := getUserInput()
 
-		//Validate user inputs
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
+		//Step 3: Validate user inputs
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+
 		if isValidName && isValidEmail && isValidTicketNumber {
 
+			//Step 4: Book the tickets
 			remainingTickets = remainingTickets - userTickets
 			bookings = append(bookings, firstName+" "+lastName)
 
-			fmt.Printf("The whole slice is: %v\n", bookings)
-			fmt.Printf("The first element of the slice is: %v\n", bookings[0])
-			fmt.Printf("The size of the slice is: %v\n", len(bookings))
-			fmt.Printf("The type of the slice %T\n", bookings)
-
 			//Call print first name function
-			firstNames := getFirstNames(bookings)
-
+			firstNames := getFirstNames()
 			fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
 
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
@@ -66,37 +65,17 @@ func main() {
 
 	}
 
-	//Switch Statements:
-
-	city := "London"
-
-	switch city {
-
-	case "New York":
-		fmt.Println("New York city selected!")
-
-	case "London":
-		fmt.Println("London city selected!")
-
-	case "New Dehli", "Bangalore":
-		fmt.Println("New Delhi & Banglaore city selected!")
-
-	default:
-		fmt.Println("Invalid city selected!")
-
-	}
-
 }
 
 // Greet user function - Greets the users
-func greetUsers(conferenceName string, totalTickets uint, remainingTickets uint) {
+func greetUsers() {
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
 	fmt.Printf("We have total of %v tickets out of which we still have %v tickets available!\n", totalTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 }
 
 // Prints firstnames of the users
-func getFirstNames(bookings []string) []string {
+func getFirstNames() []string {
 	firstNames := []string{}
 
 	for _, booking := range bookings {
@@ -108,7 +87,7 @@ func getFirstNames(bookings []string) []string {
 }
 
 // Validates user input
-func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
+func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(email, "@")
 	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
@@ -136,4 +115,26 @@ func getUserInput() (string, string, string, uint) {
 
 	return firstName, lastName, email, userTickets
 
+}
+
+func printSelectedConferenceCity() {
+	//Switch Statements:
+
+	city := "London"
+
+	switch city {
+
+	case "New York":
+		fmt.Println("New York city selected!")
+
+	case "London":
+		fmt.Println("London city selected!")
+
+	case "New Dehli", "Bangalore":
+		fmt.Println("New Delhi & Banglaore city selected!")
+
+	default:
+		fmt.Println("Invalid city selected!")
+
+	}
 }
