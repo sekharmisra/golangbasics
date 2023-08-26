@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	greetUsers()
 	var conferenceName = "Go conference"
 	const totalTickets uint = 50
 	var remainingTickets uint = 50
@@ -14,10 +13,8 @@ func main() {
 	bookings := []string{}
 
 	fmt.Printf("Conference name is of type %T, totaltickets is of type %T, remainingtickets is of type %T \n", conferenceName, totalTickets, remainingTickets)
-	fmt.Printf("Welcome to %v booking application\n", conferenceName)
-	fmt.Printf("We have total of %v tickets out of which we still have %v tickets available!\n", totalTickets, remainingTickets)
-	fmt.Println("Get your tickets here to attend")
 	fmt.Printf("Booking is of type  %T\n", bookings)
+	greetUsers(conferenceName, totalTickets, remainingTickets)
 
 	for {
 		//Infinite loop
@@ -109,6 +106,8 @@ func main() {
 
 }
 
-func greetUsers() {
-	fmt.Println("Welcome to our Go conference!")
+func greetUsers(conferenceName string, totalTickets uint, remainingTickets uint) {
+	fmt.Printf("Welcome to %v booking application\n", conferenceName)
+	fmt.Printf("We have total of %v tickets out of which we still have %v tickets available!\n", totalTickets, remainingTickets)
+	fmt.Println("Get your tickets here to attend")
 }
