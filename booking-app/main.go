@@ -30,16 +30,12 @@ func main() {
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
-			//Step 4: Book the tickets
-			remainingTickets = remainingTickets - userTickets
-			bookings = append(bookings, firstName+" "+lastName)
+			//Step 4: Book the tickets - Call the function
+			bookTickets(firstName, lastName, email, userTickets)
 
-			//Call print first name function
+			//Step 5: Call print first name function
 			firstNames := getFirstNames()
 			fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
-
-			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
-			fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
 
 			if remainingTickets == 0 {
 				fmt.Println("All tickets are sold out for the conference. Please come next year!")
@@ -95,6 +91,7 @@ func validateUserInput(firstName string, lastName string, email string, userTick
 	return isValidName, isValidEmail, isValidTicketNumber
 }
 
+// Get user input
 func getUserInput() (string, string, string, uint) {
 	var firstName string
 	var lastName string
@@ -117,6 +114,7 @@ func getUserInput() (string, string, string, uint) {
 
 }
 
+// Print selected conference city!
 func printSelectedConferenceCity() {
 	//Switch Statements:
 
@@ -137,4 +135,12 @@ func printSelectedConferenceCity() {
 		fmt.Println("Invalid city selected!")
 
 	}
+}
+
+// Finally: book tickets!
+func bookTickets(firstName string, lastName string, email string, userTickets uint) {
+	remainingTickets = remainingTickets - userTickets
+	bookings = append(bookings, firstName+" "+lastName)
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
+	fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
 }
