@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	greetUsers()
 	var conferenceName = "Go conference"
 	const totalTickets uint = 50
 	var remainingTickets uint = 50
@@ -106,4 +107,8 @@ func main() {
 
 	}
 
+}
+
+func greetUsers() {
+	fmt.Println("Welcome to our Go conference!")
 }
