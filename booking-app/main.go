@@ -50,7 +50,10 @@ func main() {
 			fmt.Printf("The type of the slice %T\n", bookings)
 
 			//Call print first name function
-			printFirstNames(bookings)
+
+			firstNames := getFirstNames(bookings)
+
+			fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
 
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
 			fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
@@ -107,12 +110,13 @@ func greetUsers(conferenceName string, totalTickets uint, remainingTickets uint)
 	fmt.Println("Get your tickets here to attend")
 }
 
-func printFirstNames(bookings []string) {
+func getFirstNames(bookings []string) []string {
 	firstNames := []string{}
 
 	for _, booking := range bookings {
 		var names = strings.Fields(booking)
 		firstNames = append(firstNames, names[0])
 	}
-	fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
+
+	return firstNames
 }
