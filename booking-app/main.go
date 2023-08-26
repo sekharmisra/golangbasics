@@ -49,16 +49,11 @@ func main() {
 			fmt.Printf("The size of the slice is: %v\n", len(bookings))
 			fmt.Printf("The type of the slice %T\n", bookings)
 
+			//Call print first name function
+			printFirstNames(bookings)
+
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
 			fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
-
-			firstNames := []string{}
-
-			for _, booking := range bookings {
-				var names = strings.Fields(booking)
-				firstNames = append(firstNames, names[0])
-			}
-			fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
 
 			if remainingTickets == 0 {
 				fmt.Println("All tickets are sold out for the conference. Please come next year!")
@@ -110,4 +105,14 @@ func greetUsers(conferenceName string, totalTickets uint, remainingTickets uint)
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
 	fmt.Printf("We have total of %v tickets out of which we still have %v tickets available!\n", totalTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
+}
+
+func printFirstNames(bookings []string) {
+	firstNames := []string{}
+
+	for _, booking := range bookings {
+		var names = strings.Fields(booking)
+		firstNames = append(firstNames, names[0])
+	}
+	fmt.Printf("The firstnames of the bookings in the application are: %v\n", firstNames)
 }
