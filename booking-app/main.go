@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 const totalTickets uint = 50
 
@@ -36,6 +39,9 @@ func main() {
 
 			//Step 4: Book the tickets - Call the function
 			bookTickets(firstName, lastName, email, userTickets)
+
+			//Send tickets for email
+			sendTickets(firstName, lastName, email, userTickets)
 
 			//Step 5: Call print first name function
 			firstNames := getFirstNames()
@@ -147,4 +153,13 @@ func bookTickets(firstName string, lastName string, email string, userTickets ui
 	fmt.Printf("List of bookings is %v\n", bookings)
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation email on %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("Remaining tickets %v for the %v\n", remainingTickets, conferenceName)
+}
+
+func sendTickets(firstName string, lastName string, email string, userTickets uint) {
+	//Sleep for 10 seconds on the current thread..
+	time.Sleep(10 * time.Second)
+	var ticket = fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
+	fmt.Println("##############################")
+	fmt.Printf("Sending ticket:\n %v \n to the email address %v\n", ticket, email)
+	fmt.Println("##############################")
 }
