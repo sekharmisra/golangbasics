@@ -41,7 +41,7 @@ func main() {
 			bookTickets(firstName, lastName, email, userTickets)
 
 			//Send tickets for email
-			sendTickets(firstName, lastName, email, userTickets)
+			go sendTickets(firstName, lastName, email, userTickets)
 
 			//Step 5: Call print first name function
 			firstNames := getFirstNames()
@@ -157,7 +157,7 @@ func bookTickets(firstName string, lastName string, email string, userTickets ui
 
 func sendTickets(firstName string, lastName string, email string, userTickets uint) {
 	//Sleep for 10 seconds on the current thread..
-	time.Sleep(10 * time.Second)
+	time.Sleep(50 * time.Second)
 	var ticket = fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
 	fmt.Println("##############################")
 	fmt.Printf("Sending ticket:\n %v \n to the email address %v\n", ticket, email)
