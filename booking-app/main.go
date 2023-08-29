@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type UserData struct {
 	userTickets uint
 }
 
+var wg = sync.WaitGroup{}
+
 func main() {
 
 	//Step 0 - Print selected conference city!
@@ -29,6 +32,8 @@ func main() {
 	for {
 		//Infinite loop
 
+		var threadCounter int = 0
+
 		//Step 2: Get user inputs
 		firstName, lastName, email, userTickets := getUserInput()
 
@@ -39,6 +44,9 @@ func main() {
 
 			//Step 4: Book the tickets - Call the function
 			bookTickets(firstName, lastName, email, userTickets)
+
+			threadCounter = threadCounter + 1
+			wg.Add(threadCounter)
 
 			//Send tickets for email
 			go sendTickets(firstName, lastName, email, userTickets)
@@ -70,7 +78,7 @@ func main() {
 		}
 
 	}
-
+	wg.Wait()
 }
 
 // Greet user function - Greets the users
@@ -162,4 +170,5 @@ func sendTickets(firstName string, lastName string, email string, userTickets ui
 	fmt.Println("##############################")
 	fmt.Printf("Sending ticket:\n %v \n to the email address %v\n", ticket, email)
 	fmt.Println("##############################")
+	wg.Done()
 }
